@@ -1,9 +1,8 @@
 package model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
+
 import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
@@ -13,33 +12,41 @@ import java.math.BigDecimal;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ProductId")
     private Long Id;
 
     @NotBlank
+    @Column(name = "ProductName", nullable = false)
     private String productName;
 
     @ManyToOne
-    @JoinColumn(name = "supplierId")
+    @JoinColumn(name = "SupplierId")
     private Long supplierId;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "CategoryId")
     private Long categoryId;
 
+    @Column(name = "QuantityPerUnit")
     private String quantityPerUnit;
 
+    @PositiveOrZero
+    @Column(name = "UnitPrice", precision = 10, scale = 2)
     private BigDecimal unitPrice;
 
     @PositiveOrZero
+    @Column(name = "UnitsInStock")
     private int unitsInStock;
 
     @PositiveOrZero
+    @Column(name = "UnitsOnOrder")
     private int unitsOnOrder;
 
     @PositiveOrZero
+    @Column(name = "ReorderLevel")
     private int reorderLevel;
 
-    @Column(name = "discontinued")
+    @Column(name = "Discontinued")
     private Boolean discontinued;
 
     public Long getId() {
@@ -121,6 +128,5 @@ public class Product {
     public void setDiscontinued(Boolean discontinued) {
         this.discontinued = discontinued;
     }
-
 
 }
