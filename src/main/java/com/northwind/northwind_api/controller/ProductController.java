@@ -1,10 +1,10 @@
-package controller;
+package com.northwind.northwind_api.controller;
 
-import model.Product;
+import com.northwind.northwind_api.model.Product;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.ProductService;
+import com.northwind.northwind_api.service.ProductService;
 
 import java.util.List;
 
@@ -19,16 +19,9 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts(){
-        System.out.println("Hello");
         List<Product>products;
         products=productService.getAllProducts();
         return ResponseEntity.ok(products);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Product>getProductByProductId(@PathVariable Long productId){
-        Product product = productService.getProductByProductId(productId);
-        return ResponseEntity.ok(product);
     }
 
     @GetMapping("/category/{categoryId}")
@@ -43,6 +36,12 @@ public class ProductController {
         products=productService.getProductByProductName(productName);
         return ResponseEntity.ok(products);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Product>getProductByProductId(@PathVariable Long productId){
+        Product product = productService.getProductByProductId(productId);
+        return ResponseEntity.ok(product);
+    }
+
     @PostMapping
     public ResponseEntity<Product>addNewProduct(@RequestBody Product product){
         Product added = productService.createProduct(product);

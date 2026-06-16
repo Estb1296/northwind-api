@@ -1,4 +1,4 @@
-package model;
+package com.northwind.northwind_api.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -19,12 +19,10 @@ public class Product {
     @Column(name = "ProductName", nullable = false)
     private String productName;
 
-    @ManyToOne
-    @JoinColumn(name = "SupplierId")
+    @Column(name = "SupplierId")
     private Long supplierId;
 
-    @ManyToOne
-    @JoinColumn(name = "CategoryId")
+    @Column(name = "CategoryId")
     private Long categoryId;
 
     @Column(name = "QuantityPerUnit")

@@ -1,8 +1,8 @@
-package service;
+package com.northwind.northwind_api.service;
 
-import model.Product;
+import com.northwind.northwind_api.model.Product;
 import org.springframework.stereotype.Service;
-import repository.ProductRepository;
+import com.northwind.northwind_api.repository.ProductRepository;
 
 import java.util.List;
 
@@ -21,9 +21,6 @@ public class ProductService {
     }
 
     public List<Product>getAllProducts(){
-        System.out.println("Hi");
-        List<Product>products = productRepository.findAll();
-        System.out.println(products);
         return productRepository.findAll();
     }
 

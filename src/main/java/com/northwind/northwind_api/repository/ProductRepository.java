@@ -1,7 +1,7 @@
-package repository;
+package com.northwind.northwind_api.repository;
 
 
-import model.Product;
+import com.northwind.northwind_api.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
