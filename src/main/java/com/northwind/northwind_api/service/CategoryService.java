@@ -2,6 +2,7 @@ package com.northwind.northwind_api.service;
 
 import com.northwind.northwind_api.model.Category;
 
+import com.northwind.northwind_api.model.Product;
 import com.northwind.northwind_api.repository.CategoryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,16 @@ public class CategoryService {
     }
     public Category createCategory(Category category){
         return categoryRepository.save(category);
+    }
+    public Category updateCategory(Long categoryId, Category updatedCategory) {
+        Category existing = getCategoryById(categoryId);
+        if(!categoryRepository.existsById(categoryId)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Can't find Category to execute an update");
+        }
+        existing.setCategoryName(updatedCategory.getCategoryName());
+        existing.setDescription(updatedCategory.getDescription());
+        existing.setPicture(updatedCategory.getPicture());
+        return categoryRepository.save(existing);
     }
 }
 

@@ -2,6 +2,7 @@ package com.northwind.northwind_api.controller;
 
 import com.northwind.northwind_api.model.Category;
 
+import com.northwind.northwind_api.model.Product;
 import com.northwind.northwind_api.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,4 +39,11 @@ public class CategoryController {
         categoryService.deleteCategory(categoryId);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/{categoryId}")
+    public ResponseEntity<Category>updateCategory(
+            @PathVariable Long categoryId,
+            @RequestBody Category category){
+        return ResponseEntity.ok(categoryService.updateCategory(categoryId,category));
+    }
+
 }

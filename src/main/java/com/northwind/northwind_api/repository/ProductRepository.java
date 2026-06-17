@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product,Long> {
-    List<Product> findByCategory_CategoryId(Long categoryId);
+    List<Product> findByCategoryCategoryId(Long categoryId);
     List<Product>findByProductNameContainingIgnoreCase(String productName);
     @Query("SELECT p FROM Product p LEFT JOIN FETCH p.category")
     List<Product> findAllWithCategory();

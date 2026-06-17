@@ -27,7 +27,7 @@ public class ProductService {
     }
 
     public List<Product> getProductByCategoryId(Long categoryId) {
-        List<Product> products = productRepository.findByCategory_CategoryId(categoryId);
+        List<Product> products = productRepository.findByCategoryCategoryId(categoryId);
         if (products.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"No products found for category: " + categoryId);
         }
@@ -52,6 +52,9 @@ public class ProductService {
 
     public Product updateProduct(Long productId, Product updatedProduct) {
         Product existing = getProductByProductId(productId);
+        if(!productRepository.existsById(productId)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Can't find the product to execute an update");
+        }
         existing.setProductName(updatedProduct.getProductName());
         existing.setDiscontinued(updatedProduct.getDiscontinued());
         return productRepository.save(existing);
