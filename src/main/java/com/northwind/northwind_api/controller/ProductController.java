@@ -30,13 +30,13 @@ public class ProductController {
         products=productService.getProductByCategoryId(categoryId);
         return ResponseEntity.ok(products);
     }
-    @GetMapping("/search/{name}")
+    @GetMapping("/search/{productName}")
     public ResponseEntity<List<Product>>searchProductByName(@PathVariable String productName){
         List<Product>products;
         products=productService.getProductByProductName(productName);
         return ResponseEntity.ok(products);
     }
-    @GetMapping("/{id}")
+    @GetMapping("/{productId}")
     public ResponseEntity<Product>getProductByProductId(@PathVariable Long productId){
         Product product = productService.getProductByProductId(productId);
         return ResponseEntity.ok(product);
@@ -54,7 +54,7 @@ public class ProductController {
         Product updated = productService.updateProduct(productId, product);
         return ResponseEntity.ok(updated);
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{productId}")
     public ResponseEntity<Void>deleteProduct(@PathVariable Long productId){
         productService.deleteProduct(productId);
         return ResponseEntity.noContent().build();

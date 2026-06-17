@@ -1,5 +1,6 @@
 package com.northwind.northwind_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -22,8 +23,10 @@ public class Product {
     @Column(name = "SupplierId")
     private Long supplierId;
 
-    @Column(name = "CategoryId")
-    private Long categoryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CategoryId", insertable = false, updatable = false)
+    @JsonIgnoreProperties({"description", "picture"})
+    private Category category;
 
     @Column(name = "QuantityPerUnit")
     private String quantityPerUnit;
@@ -71,12 +74,12 @@ public class Product {
         this.supplierId = supplierId;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getQuantityPerUnit() {
